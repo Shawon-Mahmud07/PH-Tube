@@ -18,14 +18,15 @@
 
 <body style="font-family: 'Inter', sans-serif;">
 
+  <!-- header section -->
   <header class="container mx-auto my-4 border-b-2 border-[#17171733]">
-    <div class=" flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0 bg-[#FFFFFF] pb-2 mx-3">
+    <div class=" flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0 bg-[#FFFFFF] pb-4 ">
       <div>
         <img class=" md:w-3/4" src="img/Logo.png" alt="Logo-img">
       </div>
 
-      <div>
-        <button class="btn px-3 py-0 bg-[#25252533]  text-sm md:text-lg font-normal md:font-medium text-[#252525]">Sort
+      <div class="md:mr-20">
+        <button id="sort" class="btn  bg-[#25252533]  text-sm md:text-lg font-normal md:font-medium text-[#252525]">Sort
           by
           view</button>
       </div>
@@ -37,8 +38,33 @@
     </div>
   </header>
 
+  <!-- main section -->
+  <main class="container mx-auto">
+    <section>
+      <div class="tab-container ml-2  md:w-full  py-3">
+        <div id="menu-container" class="flex justify-between md:justify-center ">
+        </div>
+      </div>
+    </section>
+
+    <!-- card section -->
+    <section class=" my-5">
+
+      <div class="card mx-4 md:mx-4 lg:mx-0 h-auto bg-base-100   ">
+        <div id="cardId" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-start ">
+
+        </div>
+      </div>
+      <div id="drawing-section" class="w-full mx-3 md:w-6/12 md:mx-auto mt-10">
+
+      </div>
+    </section>
+  </main>
+
+
+
 
   <script src="script.js"></script>
 </body>
 
-</html>
+</html
