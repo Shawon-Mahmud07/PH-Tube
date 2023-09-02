@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- daisy-ui link -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.6.4/dist/full.css" rel="stylesheet" type="text/css" />
+  <!-- tailwindcss link -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- inter font link -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+</head>
+
+<body class="container mx-auto" style="font-family: 'Inter', sans-serif;">
+  <div class="w-full  md:w-4/5 md:mx-auto my-10 md:px-0 px-3 ">
+    <h2 class="text-lg md:text-3xl mb-2 underline">The scope of var, let and const:</h2>
+    <div class="collapse collapse-arrow bg-base-200">
+      <input type="radio" name="my-accordion-2" checked="checked" />
+      <div class="collapse-title text-xl font-medium text-red-600"> var:</div>
+      <div class="collapse-content overflow-x-auto ">
+        <p>Think of a scope like a set of rules that determine where a variable can be used.
+          With
+          var,
+          there are two
+          main scopes to know about: <br> <br>
+          1. <span class="underline">Global Scope:</span> Declare a variable using var outside of any function or code
+          block. Like, inside a for loop
+          or
+          if
+          statement.It becomes a global variable. This means it can be accessed from anywhere in your JavaScript code.
+        <div class=" overflow-x-auto bg-slate-300 my-2">
+          <pre>
+          var globalVariable = 42;
+          function myFunction() {
+          console.log(globalVariable);<span class="text-red-500">// we can use it inside functions</span>
+          }
+   </pre>
+        </div>
+
+        2. <span class="underline">Function Scope:</span> Declare a variable using var inside a function, it can only be
+        used within that function.
+        <div class=" overflow-x-auto bg-slate-300 my-2">
+          <pre>
+                    function myFunction() {
+                    var localVariable = 7; <span class="text-red-500">// function-scoped variable</span>
+                    console.log(localVariable); <span class="text-red-500">// we can use it here</span>
+                    }
+                    console.log(localVariable); <span class="text-red-500">// won't work here, because it's outside the function</span>
+        </div>
+        
+        </pre>
+          </p>
+        </div>
+      </div>
+
+      <div class="collapse collapse-arrow bg-base-200 ">
+        <input type="radio" name="my-accordion-2" />
+        <div class="collapse-title text-xl font-medium text-red-600 ">
+          let:
+        </div>
+        <div class="collapse-content overflow-x-auto">
+          <p> 1. <span class="underline">Block Scope:</span> Declare a variable using let inside a block of code. Like
+            inside an if statement, for loop, or a
+            function. It can only be used within that specific block. It's like a secret that stays within its own
+            boundaries.
+          <div class=" overflow-x-auto bg-slate-300 my-2">
+            <pre>
+          if (true) {
+          let blockScopedVar = 42; <span class="text-red-500">// variable is only accessible inside this if block</span>
+          console.log(blockScopedVar);<span class="text-red-500">// we can use it here</span> 
+          }
+          console.log(blockScopedVar);<span class="text-red-500">// won't work here, it's outside the block</span> 
+        </pre>
+          </div>
+
+          2. <span class="underline">Function Scope:</span> Declare a variable using let inside a function, it will be
+          accessible only within that function, just like var.
+          <div class=" overflow-x-auto bg-slate-300 my-3">
+            <pre>
+                    function myFunction() {
+                    let functionScopedVar = 7; <span class="text-red-500">//variable is function-scoped</span>
+                    console.log(functionScopedVar); <span class="text-red-500">// we can use it here</span>
+                    }
+                    console.log(functionScopedVar); <span  class="text-red-500">//won't work here, it's outside the function </span>
+                    </pre>
+          </div>
+
+          let is more predictable because it respects the block boundaries, which means variables declared with let
+          won't
+          accidentally affect other parts of your code. It's a good choice for creating variables when you want to
+          control
+          their scope tightly.
+          </p>
+        </div>
+      </div>
+
+      <div class="collapse collapse-arrow bg-base-200">
+        <input type="radio" name="my-accordion-2" />
+        <div class="collapse-title text-xl font-medium text-red-600">
+          const:
+        </div>
+        <div class="collapse-content overflow-x-auto">
+          <p>const works similarly to let in terms of scope, but with one key difference: <br>
+            1. <span class="underline">Block Scope:</span> When you declare a variable using const inside a block of
+            code.
+            Like inside an if statement, for loop, or a
+            function. It can only be used within that specific block, just like let. It stays within its own boundaries.
+          <div class=" overflow-x-auto bg-slate-300 my-3">
+            <pre>
+                        if (true) {
+                        const blockScopedConst = 42;  <span class="text-red-500">// variable is only accessible inside this if block</span>
+                        console.log(blockScopedConst);  <span class="text-red-500">// we can use it here</span>
+                        }
+                        console.log(blockScopedConst); <span class="text-red-500">//won't work here, it's outside the block</span> 
+                      </pre>
+          </div>
+
+          2. <span class="underline">Immutable Values:</span> Declare a variable with const, it means the value
+          stored in that variable cannot be changed or reassigned after it's initially set. So, it's like having a box
+          that you can't replace the contents of once
+          you've put something inside.
+          <div class=" overflow-x-auto bg-slate-300 my-3">
+            <pre>
+                    const immutableVar = 7; <span class="text-red-500">// This variable can never be changed to hold a different value</span> 
+                    
+                    immutableVar = 10; <span class="text-red-500">// This will result in an error because you can't change the value</span>
+                  </pre>
+          </div>
+          It enforces immutability, meaning the value it holds cannot be changed once set. This helps you write code
+          that's more
+          reliable and easier to reason about.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full  md:w-4/5 md:mx-auto my-10 md:px-0  px-3">
+      <h2 class="text-lg md:text-3xl mb-2 underline">The use cases of null and undefined:</h2>
+      <div class="collapse collapse-arrow bg-base-200">
+        <input type="radio" name="my-accordion-2" checked="checked" />
+        <div class="collapse-title text-xl font-medium text-red-600"> null:</div>
+        <div class="collapse-content overflow-x-auto ">
+
+          <ul>
+            <li>Null as an intentional absence of any value or object. It's like an empty box that purposely
+              set aside.</li>
+
+            <li>We can use null when we want to explicitly indicate that a variable or object doesn't have a meaningful
+              value or hasn't been assigned yet.</li>
+
+            <li>For example, if we have a variable user and the user logs out, we might set user to null to show
+              there's no user currently logged in.</li>
+          </ul>
+
+          <div class=" overflow-x-auto bg-slate-300 my-2">
+            <pre>
+          let user = null; <span class="text-red-500">// No user is logged in</span></pre>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="collapse collapse-arrow bg-base-200 ">
+        <input type="radio" name="my-accordion-2" />
+        <div class="collapse-title text-xl font-medium text-red-600 ">
+          undefined:
+        </div>
+        <div class="collapse-content overflow-x-auto">
+          <ul>
+            <li>undefined means a variable has been declared but hasn't been assigned any value yet. It's like having a
+              box and we haven't put anything inside it.</li>
+            <li>JavaScript automatically initializes variables to undefined when we declare them but don't assign a
+              value.</li>
+            <li>we can use undefined when a variable or object exists, but it doesn't have a meaningful value yet.</li>
+          </ul>
+
+          <div class=" overflow-x-auto bg-slate-300 my-2">
+            <pre>
+              let age; <span class="text-red-500">//'age' is undefined until we assign a value
+</span>
+        </pre>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="w-full md:w-4/5 md:mx-auto my-10 md:px-0  px-3 ">
+      <h2 class="text-lg md:text-3xl mb-2 underline">The use cases of null and undefined:</h2>
+
+
+      <div class="collapse collapse-arrow bg-base-200 ">
+        <input type="radio" name="my-accordion-2" />
+        <div class="collapse-title text-xl font-medium text-red-600 ">
+          REST API:
+        </div>
+        <div class="collapse-content overflow-x-auto">
+          <p>
+            A REST API is like a menu in a restaurant. The menu provides a list of dishes we can order, along with a
+            description of each dish. When we specify what we would like, the kitchen (the server) prepares the dish and
+            serves it to you.</p><br>
+
+          <p>In this analogy:</p>
+          <ul>
+            <li>The menu is the list of available resources or endpoints. box and we haven't put anything inside it.
+            </li>
+            <li>The dish you order is the specific resource or data you request.</li>
+            <li>The description of each dish is the representation of the resource, often in JSON or XML</li>
+            <li>The kitchen preparing your dish is the server handling your request.</li>
+          </ul><br>
+          <p>
+            And the customer, decide what to order and interact with the menu (API) to place your order (send a
+            request).
+            So, a REST API is a way for you (the client) to interact with a menu (list of available resources) provided
+            by
+            a
+            restaurant (server) and order a dish (request a specific resource) that you want to enjoy.
+          </p>
+
+
+        </div>
+      </div>
+    </div>
+</body>
+
+</html>
