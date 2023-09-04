@@ -1,38 +1,28 @@
 const cardId = document.getElementById("cardId");
 const drawingSection = document.getElementById("drawing-section");
-const sort = document.getElementById("sort");
+const sortByView = document.getElementById("sort-by-view");
+const menuContainer = document.getElementById("menu-container");
 
 const handleCategory = async () => {
   const response = await fetch(
     "https://openapi.programming-hero.com/api/videos/categories"
   );
   const data = await response.json();
-  const menuContainer = document.getElementById("menu-container");
   data.data.forEach((category) => {
     const div = document.createElement("div");
-    div.innerHTML = `<button onclick="handleLoadWithId('${category.category_id}')" class="rounded-sm px-3 md:px-4 mr-3 bg-[#25252533]  text-sm md:text-lg font-normal md:font-medium text-[#252525]">${category.category}</button>`;
+    div.id = "myDiv";
+    div.innerHTML = `<button  onclick="handleLoadWithId('${category.category_id}')" class="rounded-sm px-3 py-1 md:py-0 md:px-4 mr-3 bg-[#25252533]  text-sm md:text-lg font-normal md:font-medium text-[#252525]">${category.category}</button>`;
     menuContainer.appendChild(div);
   });
 };
 
-const handleLoadWithId = async (id) => {
-  const res = await fetch(
-    `https://openapi.programming-hero.com/api/videos/category/${id}`
-  );
-  const data = await res.json();
-  drawingSection.innerHTML = "";
+let loaded = null;
+
+const displayTube = (data) => {
   cardId.innerHTML = "";
 
-  if (data.message == "no data found!!!") {
-    drawingSection.innerHTML = `
-    <img class="w-3/12 mx-auto" src="img/Icon.png" alt="">
-    <h2 class="text-center text-lg md:text-3xl font-bold">Oops!! Sorry, There is no <br> content here<h2/>
-    `;
-  }
-
-  data.data.forEach((dataTube) => {
+  data.forEach((dataTube) => {
     const { thumbnail, authors, title, others } = dataTube;
-
     const div = document.createElement("div");
     div.className = `shadow-2xl w-full rounded-xl`;
     div.innerHTML = `
@@ -62,5 +52,35 @@ const handleLoadWithId = async (id) => {
     cardId.appendChild(div);
   });
 };
+
+const handleLoadWithId = async (id) => {
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/videos/category/${id}`
+  );
+  const data = await res.json();
+
+  loaded = data.data;
+
+  drawingSection.innerHTML = "";
+  cardId.innerHTML = "";
+
+  if (data.message == "no data found!!!") {
+    drawingSection.innerHTML = `
+    <img class="w-3/12 mx-auto" src="img/Icon.png" alt="">
+    <h2 class="text-center text-lg md:text-3xl font-bold">Oops!! Sorry, There is no <br> content here<h2/>
+    `;
+  }
+
+  displayTube(loaded);
+};
+
 handleLoadWithId(1000);
 handleCategory();
+
+sortByView.addEventListener("click", function () {
+  console.log(loaded);
+  const sortedData = loaded.sort(
+    (a, b) => parseFloat(b.others.views) - parseFloat(a.others.views)
+  );
+  displayTube(sortedData);
+});
