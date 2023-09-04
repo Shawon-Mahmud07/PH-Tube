@@ -10,13 +10,10 @@ const handleCategory = async () => {
   const data = await response.json();
   data.data.forEach((category) => {
     const div = document.createElement("div");
-    div.id = "myDiv";
     div.innerHTML = `<button  onclick="handleLoadWithId('${category.category_id}')" class="rounded-sm px-3 py-1 md:py-0 md:px-4 mr-3 bg-[#25252533]  text-sm md:text-lg font-normal md:font-medium text-[#252525]">${category.category}</button>`;
     menuContainer.appendChild(div);
   });
 };
-
-let loaded = null;
 
 const displayTube = (data) => {
   cardId.innerHTML = "";
@@ -24,9 +21,16 @@ const displayTube = (data) => {
   data.forEach((dataTube) => {
     const { thumbnail, authors, title, others } = dataTube;
     const div = document.createElement("div");
-    div.className = `shadow-2xl w-full rounded-xl`;
+    div.className = `shadow-2xl w-full rounded-xl relative`;
+    const seconds = others.posted_date;
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const time = `${hours} hrs ${minutes} min ago`;
+
     div.innerHTML = `
     <figure><img class="w-full h-40 object-cover" src="${thumbnail}" alt="Shoes" /></figure>
+    <div  class="absolute bottom-24 right-2 text-white text-xs py-1 px-2 font-normal bg-[#171717]">${time}
+    </div>
         <div class=" flex gap-2 mt-2 pl-2">   
           <div >
           <img class="w-8 h-8 rounded-full" src="${
@@ -58,7 +62,6 @@ const handleLoadWithId = async (id) => {
     `https://openapi.programming-hero.com/api/videos/category/${id}`
   );
   const data = await res.json();
-
   loaded = data.data;
 
   drawingSection.innerHTML = "";
@@ -78,7 +81,6 @@ handleLoadWithId(1000);
 handleCategory();
 
 sortByView.addEventListener("click", function () {
-  console.log(loaded);
   const sortedData = loaded.sort(
     (a, b) => parseFloat(b.others.views) - parseFloat(a.others.views)
   );
